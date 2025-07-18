@@ -3,5 +3,5 @@ export interface LoginResquest {
   password: string;
 }
 export interface LoginResponse {
-  accessToken: string;
+  token: string;
 }

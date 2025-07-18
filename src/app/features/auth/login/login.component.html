@@ -1,0 +1,29 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="login-card__heading">Đăng nhập tài khoản</h2>
+    <form [formGroup]="loginForm" class="form-card" (ngSubmit)="onSubmit()">
+      <app-shared-input
+        label="Địa chỉ Email"
+        formControlName="email"
+        [required]="true"
+        type="email"
+        placeholder="Nhập địa chỉ email của bạn"
+      ></app-shared-input>
+      <app-shared-input
+        label="Mật khẩu"
+        formControlName="password"
+        [required]="true"
+        type="password"
+        placeholder="Nhập mật khẩu của bạn..."
+      ></app-shared-input>
+      <button type="submit" class="btn btn-primary">
+        <span *ngIf="isLoading" class="spinner"></span>
+        {{ isLoading ? "" : "Login" }}
+      </button>
+
+      <!-- <h3>Trạng thái Form:</h3>
+    <pre>Giá trị: {{ myForm.value | json }}</pre>
+    <pre>Hợp lệ: {{ myForm.valid }}</pre> -->
+    </form>
+  </div>
+</div>
