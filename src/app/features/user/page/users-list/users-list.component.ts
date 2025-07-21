@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 })
 export class UsersListComponent implements OnInit {
   private loadingSubscription!: Subscription; // Biến để lưu trữ đăng ký
+
   users: User[] = [];
   currentPage = 1;
   totalPages = 1;
@@ -29,21 +30,19 @@ export class UsersListComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private authService: AuthService,
-    private router: Router,
     private loadingService: LoadingService
   ) {}
 
   getUserInfo(selectedUserId: number): void {
     this.loadingService.show();
-
     this.userService.getUserById(selectedUserId).subscribe({
       next: (user) => {
         this.selectedUser = user.data;
-        this.loadingService.hide();
       },
       error: (error) => {
         console.log('error', error);
+      },
+      complete: () => {
         this.loadingService.hide();
       },
     });
@@ -61,7 +60,6 @@ export class UsersListComponent implements OnInit {
   clearUserForm(): void {
     this.isEditing = false;
     this.selectedUser = null;
-    console.log('clearUserForm');
   }
 
   loadUsers(page: number = 1): void {
@@ -71,34 +69,39 @@ export class UsersListComponent implements OnInit {
         this.users = response.data;
         this.currentPage = response.page;
         this.totalPages = response.total_pages;
-        this.loadingService.hide();
       },
       error: (error: HttpErrorResponse) => {
+        console.log('Error fetching user list', error);
+      },
+      complete: () => {
         this.loadingService.hide();
       },
     });
   }
 
-  viewUser(id: number): void {
+  handleClickViewUserBtn(id: number): void {
     this.clearUserForm();
     this.getUserInfo(id);
     this.isOpenModal = true;
     this.modalTitle = 'Chi tiết người dùng';
   }
 
-  editUser(id: number): void {
+  handleClickEditUserBtn(id: number): void {
     this.clearUserForm();
+    this.selectedUserId = id;
     this.isEditing = true;
     this.getUserInfo(id);
     this.isOpenModal = true;
     this.modalTitle = 'Chỉnh sửa người dùng';
   }
 
-  deleteUser(id: number): void {
+  handelClickDeleteUserBtn(id: number): void {
     if (confirm('Bạn có chắc chắn muốn xóa người dùng này không?')) {
       this.userService.deleteUser(id).subscribe({
-        next: () => {
-          this.loadUsers(this.currentPage);
+        next: (res) => {
+          alert('Xóa người dùng thành công!');
+          const deletedUserList = this.users.filter((user) => user.id !== id);
+          this.users = deletedUserList;
         },
         error: (error) => {
           console.error('Error deleting user:', error);
@@ -107,10 +110,26 @@ export class UsersListComponent implements OnInit {
     }
   }
 
-  addUser(): void {
+  handleClickAddUserBtn(): void {
     this.clearUserForm();
     this.isOpenModal = true;
     this.modalTitle = 'Thêm người dùng';
+  }
+
+  handleAddUser(user: User): void {
+    this.users.unshift(user);
+  }
+
+  handleEditUser(userData: any): void {
+    // this.users.unshift(user);
+    const updatedUsers = this.users.map((user) => {
+      if (user.id === userData.userId) {
+        return { ...user, ...userData.data };
+      }
+      // Nếu không, trả về user gốc
+      return user;
+    });
+    this.users = updatedUsers;
   }
 
   nextPage(): void {
@@ -129,5 +148,9 @@ export class UsersListComponent implements OnInit {
     if (this.loadingSubscription) {
       this.loadingSubscription.unsubscribe();
     }
+  }
+
+  onCloseModal() {
+    this.isOpenModal = false;
   }
 }

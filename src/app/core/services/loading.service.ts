@@ -24,26 +24,9 @@ export class LoadingService {
     });
   }
 
-  /**
-   * Dừng loading
-   */
   hide(): void {
     this.loadingSubject.next({
       isLoading: false,
     });
-  }
-
-  /**
-   * Lấy trạng thái loading hiện tại
-   */
-  getCurrentState(): LoadingState {
-    return this.loadingSubject.value;
-  }
-
-  /**
-   * Kiểm tra có đang loading không
-   */
-  get isLoading(): boolean {
-    return this.loadingSubject.value.isLoading;
   }
 }

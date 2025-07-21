@@ -20,6 +20,7 @@ export class ModalComponent {
     if (changes['visible']) {
     }
   }
+
   onClose() {
     this.close.emit();
   }

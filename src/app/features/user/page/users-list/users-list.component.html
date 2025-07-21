@@ -1,7 +1,7 @@
 <div class="user-content">
   <div class="user-content__header">
     <h3 class="user-content__title">Danh sách người dùng</h3>
-    <button class="user-content__add-btn" (click)="addUser()">
+    <button class="user-content__add-btn" (click)="handleClickAddUserBtn()">
       Thêm người dùng
     </button>
   </div>
@@ -10,9 +10,9 @@
     <app-user-item
       *ngFor="let user of users"
       [user]="user"
-      (viewUser)="viewUser($event)"
-      (editUser)="editUser($event)"
-      (deleteUser)="deleteUser($event)"
+      (viewUser)="handleClickViewUserBtn($event)"
+      (editUser)="handleClickEditUserBtn($event)"
+      (deleteUser)="handelClickDeleteUserBtn($event)"
     ></app-user-item>
   </div>
 
@@ -42,12 +42,14 @@
   <app-modal
     [visible]="isOpenModal"
     [title]="modalTitle"
-    (close)="isOpenModal = false"
+    (close)="onCloseModal()"
   >
     <app-user-modal
       [isEditing]="isEditing"
       [selectedUser]="selectedUser"
-      (close)="isOpenModal = false"
+      (closeModalEvent)="onCloseModal()"
+      (addUserDataEvent)="handleAddUser($event)"
+      (editUserDataEvent)="handleEditUser($event)"
     ></app-user-modal>
   </app-modal>
   <app-loading></app-loading>
