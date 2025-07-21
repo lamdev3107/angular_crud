@@ -1,0 +1,41 @@
+// Mixins
+@use "../abstracts/variables" as var;
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin card-shadow(
+  $offset-y,
+  $blur-radius,
+  $opacity,
+  $offset-x: 0px,
+  $spread-radius: 0px
+) {
+  box-shadow: $offset-x $offset-y $blur-radius $spread-radius
+    rgba(var.$shadow-color-base, $opacity);
+}
+
+@mixin mq-sm {
+  @media (max-width: var.$breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin mq-md {
+  @media (max-width: var.$breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin mq-lg {
+  @media (max-width: var.$breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin mq-xl {
+  @media (max-width: var.$breakpoint-xl) {
+    @content;
+  }
+}

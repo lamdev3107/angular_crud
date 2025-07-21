@@ -1,0 +1,54 @@
+<div class="user-content">
+  <div class="user-content__header">
+    <h3 class="user-content__title">Danh sách người dùng</h3>
+    <button class="user-content__add-btn" (click)="addUser()">
+      Thêm người dùng
+    </button>
+  </div>
+
+  <div class="user-content__list" *ngIf="!isLoading">
+    <app-user-item
+      *ngFor="let user of users"
+      [user]="user"
+      (viewUser)="viewUser($event)"
+      (editUser)="editUser($event)"
+      (deleteUser)="deleteUser($event)"
+    ></app-user-item>
+  </div>
+
+  <div class="user-content__pagination" *ngIf="!isLoading && totalPages > 1">
+    <button
+      class="pagination__btn"
+      [disabled]="currentPage === 1"
+      (click)="prevPage()"
+    >
+      Trước
+    </button>
+    <span class="pagination__info">
+      Trang {{ currentPage }} / {{ totalPages }}
+    </span>
+    <button
+      class="pagination__btn"
+      [disabled]="currentPage === totalPages"
+      (click)="nextPage()"
+    >
+      Sau
+    </button>
+  </div>
+
+  <div class="user-content__empty" *ngIf="!isLoading && users.length === 0">
+    <p>Không có người dùng nào.</p>
+  </div>
+  <app-modal
+    [visible]="isOpenModal"
+    [title]="modalTitle"
+    (close)="isOpenModal = false"
+  >
+    <app-user-modal
+      [isEditing]="isEditing"
+      [selectedUser]="selectedUser"
+      (close)="isOpenModal = false"
+    ></app-user-modal>
+  </app-modal>
+  <app-loading></app-loading>
+</div>

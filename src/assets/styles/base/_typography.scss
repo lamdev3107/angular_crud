@@ -1,0 +1,85 @@
+@use "../abstracts/variables" as var;
+@use "../abstracts/mixins" as mix;
+//Heade line
+
+.headline-1 {
+  font-size: 64px;
+  line-height: 76px;
+  font-weight: var.$font-weight-semibold;
+  @include mix.mq-lg {
+    font-size: 36px;
+    line-height: 44px;
+  }
+}
+.headline-2 {
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: var.$font-weight-semibold;
+  @include mix.mq-md {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}
+.headline-3 {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: var.$font-weight-semibold;
+  @include mix.mq-md {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+.headline-4 {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: var.$font-weight-semibold;
+  @include mix.mq-md {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+// Body Styles (Regular)
+.body-1 {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: var.$font-weight-regular;
+}
+
+.body-2 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: var.$font-weight-regular;
+}
+
+.body-3 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: var.$font-weight-regular;
+}
+
+.body-4 {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: var.$font-weight-regular;
+}
+
+// Body Styles (Medium)
+.body-1-medium {
+  @extend .body-1;
+  font-weight: var.$font-weight-medium;
+}
+
+.body-2-medium {
+  @extend .body-2;
+  font-weight: var.$font-weight-medium;
+}
+
+.body-3-medium {
+  @extend .body-3;
+  font-weight: var.$font-weight-medium;
+}
+
+.body-4-medium {
+  @extend .body-4;
+  font-weight: var.$font-weight-medium;
+}

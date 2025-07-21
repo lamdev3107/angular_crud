@@ -1,0 +1,45 @@
+<form [formGroup]="userForm" class="form-card" (ngSubmit)="onSubmit()">
+  <app-shared-input
+    label="Tên"
+    formControlName="first_name"
+    [required]="true"
+    [disabled]="!isEditing && selectedUser !== null"
+    type="name"
+    placeholder="Nhập tên..."
+  ></app-shared-input>
+  <app-shared-input
+    label="Họ"
+    formControlName="last_name"
+    [required]="true"
+    [disabled]="!isEditing && selectedUser !== null"
+    type="name"
+    placeholder="Nhập họ..."
+  ></app-shared-input>
+  <app-shared-input
+    label="Địa chỉ Email"
+    formControlName="email"
+    [required]="true"
+    type="email"
+    [disabled]="!isEditing && selectedUser !== null"
+    placeholder="Nhập địa chỉ..."
+  ></app-shared-input>
+
+  <div *ngIf="!isEditing && selectedUser !== null; else userBtn"></div>
+  <ng-template #userBtn>
+    <button
+      type="submit"
+      class="user-modal__btn"
+      [ngClass]="{
+        'user-modal__btn-add': !isEditing,
+        'user-modal__btn-update': isEditing
+      }"
+    >
+      <span *ngIf="selectedUser" class="spinner"></span>
+      {{ selectedUser ? "Cập nhật" : "Thêm mới" }}
+    </button>
+  </ng-template>
+
+  <!-- <h3>Trạng thái Form:</h3>
+    <pre>Giá trị: {{ myForm.value | json }}</pre>
+    <pre>Hợp lệ: {{ myForm.valid }}</pre> -->
+</form>

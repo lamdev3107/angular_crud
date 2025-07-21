@@ -7,13 +7,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './core/interceptors';
 import { AuthModule } from './features/auth/auth.module';
 import { UserModule } from './features/user/user.module';
+import { SharedModule } from './shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    SharedModule,
+    RouterModule,
     AuthModule,
     UserModule,
   ],

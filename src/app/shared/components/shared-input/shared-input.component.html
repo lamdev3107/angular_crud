@@ -1,0 +1,39 @@
+<div class="form-group">
+  <label class="form-group__label" *ngIf="label"
+    >{{ label }}
+    <span class="required" *ngIf="required">(*)</span>
+  </label>
+  <input
+    class="form-group__input"
+    [type]="type"
+    [value]="value"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    (input)="onInputChange($event)"
+    (blur)="onTouched()"
+    [ngClass]="{
+      'is-invalid':
+        formControl?.invalid && (formControl?.dirty || formControl?.touched)
+    }"
+  />
+
+  <ng-container *ngIf="formControl?.invalid && formControl?.touched">
+    <div class="error-message" *ngIf="formControl?.errors?.['required']">
+      {{ label || "Trường này" }} không được để trống.
+    </div>
+    <div class="error-message" *ngIf="formControl?.errors?.['email']">
+      Địa chỉ email không hợp lệ.
+    </div>
+    <div class="error-message" *ngIf="formControl?.errors?.['minlength']">
+      Phải có ít nhất {{ formControl.errors?.['minlength'].requiredLength }} ký
+      tự.
+    </div>
+    <div class="error-message" *ngIf="formControl?.errors?.['maxlength']">
+      Không được vượt quá
+      {{ formControl.errors?.['maxlength'].requiredLength }} ký tự.
+    </div>
+    <div class="error-message" *ngIf="formControl?.errors?.['pattern']">
+      {{ label }} không hợp lệ.
+    </div>
+  </ng-container>
+</div>

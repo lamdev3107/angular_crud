@@ -1,0 +1,29 @@
+@use "../../../../assets//styles/abstracts" as *;
+
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 8px 20px;
+  height: 64px;
+  display: flex;
+  background-color: $neutral-silver-color;
+  justify-content: space-between;
+  align-items: center;
+  &__title {
+    font-size: 20px;
+    color: $secondary-color;
+    font-weight: bold;
+    text-align: center;
+  }
+  svg {
+    width: 20px;
+    height: 20px;
+    &:hover {
+      cursor: pointer;
+      fill: $info-color;
+    }
+  }
+}

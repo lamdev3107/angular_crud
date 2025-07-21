@@ -1,0 +1,26 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.shadow-sm {
+  @include card-shadow(2px, 2px, 0.6); // offset-y: 2px, blur: 2px, opacity: 60%
+}
+
+.shadow-md {
+  @include card-shadow(4px, 4px, 0.4); // offset-y: 4px, blur: 4px, opacity: 40%
+}
+
+.shadow-lg {
+  @include card-shadow(6px, 6px, 0.3); // offset-y: 6px, blur: 6px, opacity: 30%
+}
+
+.shadow-xl {
+  @include card-shadow(8px, 8px, 0.4); // offset-y: 8px, blur: 8px, opacity: 40%
+}
+
+.shadow-2xl {
+  @include card-shadow(
+    16px,
+    16px,
+    0.3
+  ); // offset-y: 16px, blur: 16px, opacity: 30%
+}

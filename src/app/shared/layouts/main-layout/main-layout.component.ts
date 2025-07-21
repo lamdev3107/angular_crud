@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AppRoutingModule } from 'src/app/app-routing.module';
 
 @Component({
   selector: 'app-main-layout',

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../core/services/auth.service';
+
 import { Router } from '@angular/router';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required],
     });
   }
+
   onSubmit(): void {
     if (this.loginForm.valid) {
       this.isLoading = true;
@@ -35,7 +37,7 @@ export class LoginComponent implements OnInit {
           this.authService.saveToken(response.token);
           this.isLoading = false;
           this.error = '';
-          this.router.navigate(['users-list']);
+          this.router.navigate(['users']);
         },
         error: (error) => {
           this.error = 'Invalid credentials';
